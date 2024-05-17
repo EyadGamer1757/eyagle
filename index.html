@@ -2,33 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>eyagle</title>
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="input.css">
+    <script src="input.js"></script>
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+
 </head>
 <body>
-    <script>
-        document.write("Write a website👉🏻")
-        document.write("Search for anything you want😉😎")
-    </script>
-    <py-script>
-        import time
-        import webbrowser
-        time.sleep(1)
-        a=input("")
-        print("")
-        print("The website you typed about ({0})".format(a))
-        time.sleep(1)
-        print('.')
-        time.sleep(1)
-        print('.')
-        time.sleep(1)
-        print('.')
-        time.sleep(1)
-        print('.')
-        time.sleep(1)
-        print('.')
-        webbrowser.open('https://'+a)
-    </py-script>
+    <input type="text" id="searchInput" placeholder="Search" class="search"/>
+    <button class="search" onclick="search()">🔎</button>
+    <hr>
+    <!-- <input type="text area"/> -->
+    <img src='icon.ico' height = "150" width = "150">
+    <h2>Enter the URL:</h2>
+    <input type="text" id="userInput" placeholder="www.example.com" class="url"/>
+    <button onclick="displayInput()" class="url">Open Website</button>
+    <p id="displayArea"></p>
+    <p id='search'></p>
 </body>
 </html>
