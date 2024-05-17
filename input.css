@@ -1,0 +1,27 @@
+body {
+    font-family: sans-serif;
+    background-color: black;
+    text-align: center;
+}
+p {
+    color: #00ff22;
+}
+h2 {
+    color: #cd80ff;
+    font-style: italic;
+    text-align: center;
+    /*border: 1px solid black;*/
+}
+img {
+    border-radius: 25px 25px 25px 25px;
+}
+.url {
+    border-radius: 25px 25px 25px 25px;
+}
+.search {
+    border-radius: 25px 25px 25px 25px;
+    display:inline;
+}
+#searchInput{
+    width: 90%;
+}
