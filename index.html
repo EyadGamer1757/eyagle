@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eyagle</title>
+    <title>Document</title>
     <link rel="stylesheet" href="input.css">
     <script src="input.js"></script>
     <link rel="icon" type="image/x-icon" href="icon.ico">
@@ -18,6 +18,52 @@
     <input type="text" id="userInput" placeholder="www.example.com" class="url"/>
     <button onclick="displayInput()" class="url">Open Website</button>
     <p id="displayArea"></p>
-    <p id='search'></p>
+    <p id='search'></p>    
+    <button id="createButton">➕</button>
+    <div id="linkContainer"></div>
+
+    <script>
+        // Check if a URL is already stored in local storage when the page loads
+        window.addEventListener('load', function() {
+            let storedLink = localStorage.getItem('userLink');
+            if (storedLink) {
+                createLinkElement(storedLink);
+            }
+        });
+
+        document.getElementById('createButton').addEventListener('click', function() {
+            // Prompt the user for input
+            let userInput = prompt("Please enter the URL:");
+            
+            // Check if the user entered something
+            if (userInput) {
+                // Store the value in local storage
+                localStorage.setItem('userLink', userInput);
+
+                // Create the link element
+                createLinkElement(userInput);
+            } else {
+                alert("No URL entered.");
+            }
+        });
+
+        function createLinkElement(url) {
+            // Create an 'a' element
+            let linkElement = document.createElement('a');
+            
+            // Set the href and text content of the 'a' element
+            linkElement.href = url;
+            linkElement.textContent = url;
+            
+            // Optionally, set the target attribute to open in a new tab
+            linkElement.target = '_blank';
+            
+            // Append the 'a' element to the container
+            document.getElementById('linkContainer').appendChild(linkElement);
+            
+            // Add a line break after the link (optional)
+            document.getElementById('linkContainer').appendChild(document.createElement('br'));
+        }
+    </script>
 </body>
 </html>
