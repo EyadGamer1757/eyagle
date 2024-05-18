@@ -20,10 +20,41 @@
     <p id="displayArea"></p>
     <p id='search'></p>
 
-    <button id="createButton"> ➕ </button>
+    <button id="createButton">Create Link</button>
     <div id="linkContainer"></div>
 
     <script>
+        // Function to create link element
+        function createLinkElement(url) {
+            // Create an 'a' element
+            let linkElement = document.createElement('a');
+            
+            // Set the href and text content of the 'a' element
+            linkElement.href = url;
+            linkElement.textContent = url;
+            
+            // Add an event listener to open the link in a new tab
+            linkElement.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default behavior of navigating to the URL
+                window.open(url, '_blank'); // Open the URL in a new tab
+            });
+            
+            // Append the 'a' element to the container
+            document.getElementById('linkContainer').appendChild(linkElement);
+            
+            // Add a line break after the link (optional)
+            document.getElementById('linkContainer').appendChild(document.createElement('br'));
+        }
+
+        // Check if a URL is stored in local storage when the page loads
+        window.addEventListener('load', function() {
+            let storedLink = localStorage.getItem('userLink');
+            if (storedLink) {
+                createLinkElement(storedLink);
+            }
+        });
+
+        // Event listener for button click
         document.getElementById('createButton').addEventListener('click', function() {
             // Prompt the user for input
             let userInput = prompt("Please enter the URL:");
@@ -39,27 +70,6 @@
                 alert("No URL entered.");
             }
         });
-
-        function createLinkElement(url) {
-            // Create an 'a' element
-            let linkElement = document.createElement('a');
-            
-            // Set the href and text content of the 'a' element
-            linkElement.href = url;
-            linkElement.textContent = url;
-            
-            // Add an event listener to open the link in a new tab
-            linkElement.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default behavior of navigating to the URL
-                window.open('https://'+ url, '_blank'); // Open the URL in a new tab
-            });
-            
-            // Append the 'a' element to the container
-            document.getElementById('linkContainer').appendChild(linkElement);
-            
-            // Add a line break after the link (optional)
-            document.getElementById('linkContainer').appendChild(document.createElement('br'));
-        }
     </script>
 </body>
 </html>
