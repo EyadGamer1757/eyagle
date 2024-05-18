@@ -10,7 +10,7 @@
 </head>
 <body>
     <input type="text" id="searchInput" placeholder="Search" class="search"/>
-    <button class="search" onclick="search()"> 🔎 </button>
+    <button class="search" onclick="search()">🔎</button>
     <hr>
     <!-- <input type="text area"/> -->
     <img src='icon.ico' height = "150" width = "150">
@@ -18,19 +18,12 @@
     <input type="text" id="userInput" placeholder="www.example.com" class="url"/>
     <button onclick="displayInput()" class="url">Open Website</button>
     <p id="displayArea"></p>
-    <p id='search'></p>    
-    <button id="createButton">➕</button>
+    <p id='search'></p>
+
+    <button id="createButton"> ➕ </button>
     <div id="linkContainer"></div>
 
     <script>
-        // Check if a URL is already stored in local storage when the page loads
-        window.addEventListener('load', function() {
-            let storedLink = localStorage.getItem('userLink');
-            if (storedLink) {
-                createLinkElement(storedLink);
-            }
-        });
-
         document.getElementById('createButton').addEventListener('click', function() {
             // Prompt the user for input
             let userInput = prompt("Please enter the URL:");
@@ -55,8 +48,11 @@
             linkElement.href = url;
             linkElement.textContent = url;
             
-            // Optionally, set the target attribute to open in a new tab
-            linkElement.target = '_blank';
+            // Add an event listener to open the link in a new tab
+            linkElement.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default behavior of navigating to the URL
+                window.open('https://'+ url, '_blank'); // Open the URL in a new tab
+            });
             
             // Append the 'a' element to the container
             document.getElementById('linkContainer').appendChild(linkElement);
