@@ -1,48 +1,51 @@
-// Load links from local storage when the page loads
-window.addEventListener('load', function() {
-    let storedLinks = JSON.parse(localStorage.getItem('userLinks') || '[]');
-    storedLinks.forEach(url => createLinkElement(url));
-});
+// Function to save links to local storage
+function saveLinks(links) {
+    localStorage.setItem('savedLinks', JSON.stringify(links));
+}
 
-document.getElementById('createButton').addEventListener('click', function() {
-    // Prompt the user for input
-    let userInput = prompt("Please enter the URL:");
-    
-    // Check if the user entered something
-    if (userInput) {
-        // Ensure the URL starts with "https://"
-        if (!userInput.startsWith('https://')) {
-            userInput = 'https://' + userInput;
-        }
+// Function to get links from local storage
+function getLinks() {
+    const savedLinks = localStorage.getItem('savedLinks');
+    return savedLinks ? JSON.parse(savedLinks) : [];
+}
 
-        // Store the value in local storage
-        let storedLinks = JSON.parse(localStorage.getItem('userLinks') || '[]');
-        storedLinks.push(userInput);
-        localStorage.setItem('userLinks', JSON.stringify(storedLinks));
+// Function to display saved links on page load
+function displaySavedLinks() {
+    const linkContainer = document.getElementById('linkContainer');
+    const links = getLinks();
 
-        // Create the link element
-        createLinkElement(userInput);
-    } else {
-        alert("No URL entered.");
-    }
-});
-
-function createLinkElement(url) {
-    // Create an 'a' element
-    let linkElement = document.createElement('a');
-    
-    // Set the href and text content of the 'a' element
-    linkElement.href = url;
-    linkElement.textContent = url;
-    
-    // Add an event listener to open the link in a new tab
-    linkElement.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default behavior of navigating to the URL
-        window.open(url, '_blank'); // Open the URL in a new tab
+    links.forEach(link => {
+        const newLink = document.createElement('a');
+        newLink.textContent = link;
+        newLink.href = link.startsWith('http://') || link.startsWith('https://') ? link : `http://${link}`;
+        newLink.target = '_blank';
+        newLink.style.display = 'block';
+        newLink.style.margin = '10px 0';
+        linkContainer.appendChild(newLink);
     });
-    
-    // Append the 'a' element to the container
-    document.getElementById('linkContainer').appendChild(linkElement);
+}
+
+// Event listener for the create button
+document.getElementById('createButton').addEventListener('click', function() {
+    const linkContainer = document.getElementById('linkContainer');
+    const userInput = document.getElementById('userInput').value;
+    const newLink = document.createElement('a');
+
+    newLink.textContent = userInput;
+    newLink.href = userInput.startsWith('http://') || userInput.startsWith('https://') ? userInput : `http://${userInput}`;
+    newLink.target = '_blank';
+    newLink.style.display = 'block';
+    newLink.style.margin = '10px 0';
+    linkContainer.appendChild(newLink);
+
+    // Save the new link to local storage
+    const links = getLinks();
+    links.push(userInput);
+    saveLinks(links);
+});
+
+// Display saved links when the page is loaded
+document.addEventListener('DOMContentLoaded', displaySavedLinks);
     
     // Add a line break after the link (optional)
     document.getElementById('linkContainer').appendChild(document.createElement('br'));
