@@ -42,6 +42,7 @@ document.getElementById('createButton').addEventListener('click', function() {
     const links = getLinks();
     links.push(userInput);
     saveLinks(links);
+});
 
 // Display saved links when the page is loaded
 document.addEventListener('DOMContentLoaded', displaySavedLinks);
