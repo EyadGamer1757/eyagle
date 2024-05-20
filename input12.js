@@ -46,7 +46,3 @@ document.getElementById('createButton').addEventListener('click', function() {
 
 // Display saved links when the page is loaded
 document.addEventListener('DOMContentLoaded', displaySavedLinks);
-    
-    // Add a line break after the link (optional)
-    document.getElementById('linkContainer').appendChild(document.createElement('br'));
-}
