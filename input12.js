@@ -44,5 +44,17 @@ document.getElementById('createButton').addEventListener('click', function() {
     saveLinks(links);
 });
 
+// Function to delete all saved links
+function deleteAllLinks() {
+    localStorage.removeItem('savedLinks'); // Clear local storage
+    const linkContainer = document.getElementById('linkContainer');
+    while (linkContainer.firstChild) {
+        linkContainer.removeChild(linkContainer.firstChild); // Remove all child elements
+    }
+}
+
+// Event listener for the delete button
+document.getElementById('deleteButton').addEventListener('click', deleteAllLinks);
+
 // Display saved links when the page is loaded
 document.addEventListener('DOMContentLoaded', displaySavedLinks);
