@@ -36,6 +36,10 @@ button.search:hover {
     background-color: #00f346;
 }
 
+#displayInput:hover{
+    background-color: #00b634;
+}
+
 #createButton {
     margin-top: 20px;
     cursor: pointer;
