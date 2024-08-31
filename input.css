@@ -38,6 +38,7 @@ button.search:hover {
 
 #displayInput:hover{
     background-color: #00b634;
+    cursor: pointer;
 }
 
 #createButton {
